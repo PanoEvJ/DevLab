@@ -5,7 +5,7 @@ from crewai_tools import BaseTool, DirectoryReadTool, FileReadTool, SerperDevToo
 from IPython.display import Markdown
 
 openai_api_key = os.environ["OPENAI_API_KEY"]
-os.environ["OPENAI_MODEL_NAME"] = "gpt-3.5-turbo"
+os.environ["OPENAI_MODEL_NAME"] = "gpt-4-turbo"
 
 sales_rep_agent = Agent(
     role="Sales Representative",
