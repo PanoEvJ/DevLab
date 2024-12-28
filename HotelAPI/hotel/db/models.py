@@ -10,7 +10,7 @@ class DBCustomer(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     first_name = Column(String(250), nullable=False)
     last_name = Column(String(250), nullable=False)
-    email = Column(String(250), nullable=False)
+    email_address = Column(String(250), nullable=False)
 
 
 class DBRoom(Base):
