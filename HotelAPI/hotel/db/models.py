@@ -1,30 +1,34 @@
 from sqlalchemy import Column, Date, Float, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
 
 class DBCustomer(Base):
-    __tablename__ = "customers"
-    id = Column(Integer, primary_key=True)
-    first_name = Column(String)
-    last_name = Column(String)
-    email = Column(String)
+    __tablename__ = "customer"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    first_name = Column(String(250), nullable=False)
+    last_name = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False)
 
 
 class DBRoom(Base):
-    __tablename__ = "rooms"
-    id = Column(Integer, primary_key=True)
-    number = Column(Integer)
-    size = Column(Integer)
-    price = Column(Float)
+    __tablename__ = "room"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    number = Column(String(250), nullable=False)
+    size = Column(Integer, nullable=False)
+    price = Column(Float, nullable=False)
 
 
 class DBBooking(Base):
-    __tablename__ = "bookings"
-    id = Column(Integer, primary_key=True)
-    customer_id = Column(Integer, ForeignKey("customers.id"))
-    room_id = Column(Integer, ForeignKey("rooms.id"))
-    start_date = Column(Date)
-    end_date = Column(Date)
-    total_price = Column(Float)
+    __tablename__ = "booking"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    from_date = Column(Date, nullable=False)
+    to_date = Column(Date, nullable=False)
+    price = Column(Float, nullable=False)
+
+    customer_id = Column(Integer, ForeignKey("customer.id"))
+    customer = relationship("DBCustomer")
+    room_id = Column(Integer, ForeignKey("room.id"))
+    room = relationship("DBRoom")
