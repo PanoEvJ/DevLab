@@ -5,6 +5,10 @@ from sqlalchemy.orm import relationship
 Base = declarative_base()
 
 
+def to_dict(obj: Base):
+    return {c.name: getattr(obj, c.name) for c in obj.__table__.columns}
+
+
 class DBCustomer(Base):
     __tablename__ = "customer"
     id = Column(Integer, primary_key=True, autoincrement=True)
