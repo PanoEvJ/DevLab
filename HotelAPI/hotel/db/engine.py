@@ -11,5 +11,5 @@ DBSession = sessionmaker()
 def init_db(file: str) -> Engine:
     engine = create_engine(file)
     Base.metadata.bind = engine
-    DBSession.bind = engine
+    DBSession.configure(bind=engine)
     return engine
