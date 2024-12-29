@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from hotel.operations.customer import (
+from hotel.operations.customers import (
     CustomerCreateData,
     CustomerUpdateData,
     create_customer,
