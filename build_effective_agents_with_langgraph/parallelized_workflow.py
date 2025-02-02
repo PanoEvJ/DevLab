@@ -16,7 +16,7 @@ class State(TypedDict):
     combined_output: str
 
 
-# Instanciate the LLM
+# Instanciate the generator LLM
 llm = ChatAnthropic(
     model="claude-3-5-haiku-latest", api_key=os.getenv("ANTHROPIC_API_KEY")
 )

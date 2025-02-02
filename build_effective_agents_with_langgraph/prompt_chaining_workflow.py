@@ -3,7 +3,7 @@ import os
 from langchain_anthropic import ChatAnthropic
 from langgraph.graph import END, START, StateGraph
 from langgraph.graph.state import CompiledStateGraph
-from typing_extensions import TypedDict
+from typing_extensions import Literal, TypedDict
 
 llm = ChatAnthropic(
     model="claude-3-5-haiku-latest", api_key=os.getenv("ANTHROPIC_API_KEY")
@@ -38,7 +38,7 @@ def polish_joke(state: State) -> State:
 
 
 # Conditional edge function to check if the joke has a punchline
-def check_punchline(state: State) -> State:
+def check_punchline(state: State) -> Literal["Pass", "Fail"]:
     """Gate function to check if the joke has a punchline"""
 
     # Simpe check: does the joke contain "?" or "!"
