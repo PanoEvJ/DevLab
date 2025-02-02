@@ -66,5 +66,5 @@ workflow.add_edge("polish_joke", END)
 chain = workflow.compile()
 
 # Show workflow
-with open("workflow.png", "wb") as f:
+with open("prompt_chaining.png", "wb") as f:
     f.write(chain.get_graph().draw_mermaid_png())
