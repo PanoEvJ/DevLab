@@ -2,6 +2,7 @@ import os
 
 from langchain_anthropic import ChatAnthropic
 from langgraph.graph import END, START, StateGraph
+from langgraph.graph.state import CompiledStateGraph
 from typing_extensions import TypedDict
 
 llm = ChatAnthropic(
@@ -63,8 +64,24 @@ workflow.add_edge("improve_joke", "polish_joke")
 workflow.add_edge("polish_joke", END)
 
 # Compile the graph
-chain = workflow.compile()
+chain: CompiledStateGraph = workflow.compile()
 
 # Show workflow
 with open("prompt_chaining.png", "wb") as f:
     f.write(chain.get_graph().draw_mermaid_png())
+
+# Invoke the workflow
+state: State = chain.invoke({"topic": "cats"})
+
+print("Initial joke:")
+print(state["joke"])
+print("\n--- --- ---\n")
+if "improved_joke" in state:
+    print("Improved joke:")
+    print(state["improved_joke"])
+    print("\n--- --- ---\n")
+
+    print("Final joke:")
+    print(state["final_joke"])
+else:
+    print("Joke failed quality gate - no punchline detected")
